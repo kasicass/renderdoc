@@ -36,10 +36,11 @@ public:
 
   void LazyInit();
 
-  RDCDriver GetFrameCaptureDriver() { return RDCDriver::D3D9; }
-  void StartFrameCapture(void *dev, void *wnd);
-  bool EndFrameCapture(void *dev, void *wnd);
-  bool DiscardFrameCapture(void *dev, void *wnd);
+  // IFrameCapturer methods
+  virtual RDCDriver GetFrameCaptureDriver() override { return RDCDriver::D3D9; }
+  virtual void StartFrameCapture(void *dev, void *wnd) override;
+  virtual bool EndFrameCapture(void *dev, void *wnd) override;
+  virtual bool DiscardFrameCapture(void *dev, void *wnd) override;
 
   void InternalRef() { InterlockedIncrement(&m_InternalRefcount); }
   void InternalRelease() { InterlockedDecrement(&m_InternalRefcount); }
@@ -51,6 +52,7 @@ public:
   }
 
   D3D9DebugManager *GetDebugManager() { return m_DebugManager; }
+
   /*** IUnknown methods ***/
   ULONG STDMETHODCALLTYPE AddRef() { return m_RefCounter.AddRef(); }
   ULONG STDMETHODCALLTYPE Release()
