@@ -100,7 +100,7 @@ private:
   static DWORD WINAPI PERF_GetStatus_hook() { return 1; }
   static IDirect3D9 *WINAPI Create9_hook(UINT SDKVersion)
   {
-    RDCLOG("App creating d3d9 %x", SDKVersion);
+    RDCLOG("App creating d3d9, sdkversion: %u", SDKVersion);
 
     IDirect3D9 *realD3D = d3d9hooks.Create9()(SDKVersion);
 
